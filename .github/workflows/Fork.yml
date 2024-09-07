@@ -1,0 +1,142 @@
+# 2024年9月6日
+name: Fork & Edit
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "30 12,22 * * *"
+  
+jobs:
+  Fork-FLITER-list:
+    runs-on: ubuntu-latest
+    env:
+      TZ: 'Asia/Shanghai'
+    
+    steps: 
+    - name: Checkout target repository
+      uses: actions/checkout@v4.1.0
+      with:
+        repository: 666OS/YYDS
+        path: YYDS-repo
+
+    - name: Download JS
+      run: |
+        mkdir -p YYDS-repo/JS
+        # Sub-Store 脚本操作不联网
+        curl -L -o YYDS-repo/JS/rename.js "https://raw.githubusercontent.com/Keywos/rule/main/rename.js"
+
+    - name: Download files to Mihomo
+      run: |
+        mkdir -p YYDS-repo/mihomo/rules
+        # Domain mrs 
+        curl -L -o YYDS-repo/mihomo/rules/openai.mrs "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/openai.mrs"
+        curl -L -o YYDS-repo/mihomo/rules/telegram.mrs "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/telegram.mrs"
+        curl -L -o YYDS-repo/mihomo/rules/twitter.mrs "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/twitter.mrs"
+        curl -L -o YYDS-repo/mihomo/rules/youtube.mrs "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/youtube.mrs"
+        curl -L -o YYDS-repo/mihomo/rules/spotify.mrs "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/spotify.mrs"
+        curl -L -o YYDS-repo/mihomo/rules/netflix.mrs "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/netflix.mrs"
+        curl -L -o YYDS-repo/mihomo/rules/disney.mrs "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/disney.mrs"
+        curl -L -o YYDS-repo/mihomo/rules/hbo.mrs "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/hbo.mrs"
+        curl -L -o YYDS-repo/mihomo/rules/tiktok.mrs "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/tiktok.mrs"
+        
+        curl -L -o YYDS-repo/mihomo/rules/github.mrs "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/github.mrs"
+        curl -L -o YYDS-repo/mihomo/rules/onedrive.mrs "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/onedrive.mrs"
+        curl -L -o YYDS-repo/mihomo/rules/microsoft@cn.mrs "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/microsoft@cn.mrs"
+        curl -L -o YYDS-repo/mihomo/rules/microsoft.mrs "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/microsoft.mrs"
+        curl -L -o YYDS-repo/mihomo/rules/instagram.mrs "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/instagram.mrs"
+        curl -L -o YYDS-repo/mihomo/rules/facebook.mrs "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/facebook.mrs"
+        curl -L -o YYDS-repo/mihomo/rules/meta.mrs "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/meta.mrs"
+        curl -L -o YYDS-repo/mihomo/rules/google.mrs "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/google.mrs"
+        curl -L -o YYDS-repo/mihomo/rules/apple-cn.mrs "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/apple-cn.mrs"
+        curl -L -o YYDS-repo/mihomo/rules/apple.mrs "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/apple.mrs"
+        curl -L -o YYDS-repo/mihomo/rules/paypal@cn.mrs "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/paypal@cn.mrs"
+        curl -L -o YYDS-repo/mihomo/rules/paypal.mrs "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/paypal.mrs"
+        curl -L -o YYDS-repo/mihomo/rules/cloudflare-cn.mrs "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/cloudflare-cn.mrs"
+        curl -L -o YYDS-repo/mihomo/rules/cloudflare.mrs "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/cloudflare.mrs"
+        
+        curl -L -o YYDS-repo/mihomo/rules/category-public-tracker.mrs "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/category-public-tracker.mrs"
+        curl -L -o YYDS-repo/mihomo/rules/category-games.mrs "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/category-games.mrs"
+        curl -L -o YYDS-repo/mihomo/rules/category-media-cn.mrs "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/category-media-cn.mrs"
+        curl -L -o YYDS-repo/mihomo/rules/category-media.mrs "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/category-media.mrs"
+        curl -L -o YYDS-repo/mihomo/rules/category-cryptocurrency.mrs "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/category-cryptocurrency.mrs"
+        curl -L -o YYDS-repo/mihomo/rules/category-social-media-!cn.mrs "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/category-social-media-!cn.mrs"
+        curl -L -o YYDS-repo/mihomo/rules/category-ai-chat-!cn.mrs "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/category-ai-chat-!cn.mrs"
+        curl -L -o YYDS-repo/mihomo/rules/geolocation-!cn.mrs "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/geolocation-!cn.mrs"
+        
+        curl -L -o YYDS-repo/mihomo/rules/private.mrs "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/private.mrs"
+        curl -L -o YYDS-repo/mihomo/rules/cn.mrs "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/cn.mrs"
+        # IP mrs 
+        curl -L -o YYDS-repo/mihomo/rules/cloudflare_ip.mrs "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/cloudflare.mrs"
+        curl -L -o YYDS-repo/mihomo/rules/facebook_ip.mrs "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/facebook.mrs"
+        curl -L -o YYDS-repo/mihomo/rules/google_ip.mrs "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/google.mrs"
+        curl -L -o YYDS-repo/mihomo/rules/netflix_ip.mrs "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/netflix.mrs"
+        curl -L -o YYDS-repo/mihomo/rules/twitter_ip.mrs "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/twitter.mrs"
+        curl -L -o YYDS-repo/mihomo/rules/telegram_ip.mrs "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/telegram.mrs"
+        curl -L -o YYDS-repo/mihomo/rules/private_ip.mrs "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/private.mrs"
+        curl -L -o YYDS-repo/mihomo/rules/cn_ip.mrs "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/cn.mrs"
+        # Domain list 
+        curl -L -o YYDS-repo/mihomo/rules/openai.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/openai.list"
+        curl -L -o YYDS-repo/mihomo/rules/telegram.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/telegram.list"
+        curl -L -o YYDS-repo/mihomo/rules/twitter.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/twitter.list"
+        curl -L -o YYDS-repo/mihomo/rules/youtube.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/youtube.list"
+        curl -L -o YYDS-repo/mihomo/rules/spotify.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/spotify.list"
+        curl -L -o YYDS-repo/mihomo/rules/netflix.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/netflix.list"
+        curl -L -o YYDS-repo/mihomo/rules/disney.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/disney.list"
+        curl -L -o YYDS-repo/mihomo/rules/hbo.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/hbo.list"
+        curl -L -o YYDS-repo/mihomo/rules/tiktok.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/tiktok.list"
+        
+        curl -L -o YYDS-repo/mihomo/rules/github.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/github.list"
+        curl -L -o YYDS-repo/mihomo/rules/onedrive.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/onedrive.list"
+        curl -L -o YYDS-repo/mihomo/rules/microsoft@cn.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/microsoft@cn.list"
+        curl -L -o YYDS-repo/mihomo/rules/microsoft.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/microsoft.list"
+        curl -L -o YYDS-repo/mihomo/rules/instagram.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/instagram.list"
+        curl -L -o YYDS-repo/mihomo/rules/facebook.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/facebook.list"
+        curl -L -o YYDS-repo/mihomo/rules/meta.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/meta.list"
+        curl -L -o YYDS-repo/mihomo/rules/google.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/google.list"
+        curl -L -o YYDS-repo/mihomo/rules/apple-cn.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/apple-cn.list"
+        curl -L -o YYDS-repo/mihomo/rules/apple.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/apple.list"
+        curl -L -o YYDS-repo/mihomo/rules/paypal@cn.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/paypal@cn.list"
+        curl -L -o YYDS-repo/mihomo/rules/paypal.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/paypal.list"
+        curl -L -o YYDS-repo/mihomo/rules/cloudflare-cn.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/cloudflare-cn.list"
+        curl -L -o YYDS-repo/mihomo/rules/cloudflare.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/cloudflare.list"
+        
+        curl -L -o YYDS-repo/mihomo/rules/category-public-tracker.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/category-public-tracker.list"
+        curl -L -o YYDS-repo/mihomo/rules/category-games.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/category-games.list"
+        curl -L -o YYDS-repo/mihomo/rules/category-media-cn.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/category-media-cn.list"
+        curl -L -o YYDS-repo/mihomo/rules/category-media.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/category-media.list"
+        curl -L -o YYDS-repo/mihomo/rules/category-cryptocurrency.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/category-cryptocurrency.list"
+        curl -L -o YYDS-repo/mihomo/rules/category-social-media-!cn.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/category-social-media-!cn.list"
+        curl -L -o YYDS-repo/mihomo/rules/category-ai-chat-!cn.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/category-ai-chat-!cn.list"
+        curl -L -o YYDS-repo/mihomo/rules/geolocation-!cn.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/geolocation-!cn.list"
+        
+        curl -L -o YYDS-repo/mihomo/rules/private.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/private.list"
+        curl -L -o YYDS-repo/mihomo/rules/cn.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/cn.list"
+        # IP list 
+        curl -L -o YYDS-repo/mihomo/rules/cloudflare_ip.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/classical/cloudflare.list"
+        curl -L -o YYDS-repo/mihomo/rules/facebook_ip.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/classical/facebook.list"
+        curl -L -o YYDS-repo/mihomo/rules/google_ip.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/classical/google.list"
+        curl -L -o YYDS-repo/mihomo/rules/netflix_ip.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/classical/netflix.list"
+        curl -L -o YYDS-repo/mihomo/rules/twitter_ip.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/classical/twitter.list"
+        curl -L -o YYDS-repo/mihomo/rules/telegram_ip.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/classical/telegram.list"
+        curl -L -o YYDS-repo/mihomo/rules/private_ip.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/classical/private.list"
+        curl -L -o YYDS-repo/mihomo/rules/cn_ip.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/classical/cn.list"
+
+###### Commit
+    - name: Add and Commits
+      run: |
+        cd YYDS-repo
+        if [[ -n $(git status -s) ]]; then
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add .
+          git commit -m "Auto Update $(TZ='Asia/Shanghai' date +'%Y-%m-%d %H:%M')"
+          git push origin HEAD
+        else
+          echo "No changes to commit."
+        fi
+
+    - name: Cleanup Workflow
+      uses: Mattraks/delete-workflow-runs@main
+      with:
+        retain_days: 0
+        keep_minimum_runs: 2
