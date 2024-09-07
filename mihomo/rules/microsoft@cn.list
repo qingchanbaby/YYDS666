@@ -126,9 +126,7 @@ DOMAIN-SUFFIX,trustcenter.cn
 DOMAIN-SUFFIX,unity3dcloud.cn
 DOMAIN-SUFFIX,windowsazure.cn
 DOMAIN-SUFFIX,windowsazurestatus.cn
-DOMAIN-REGEX,.+\.azchcdn[a-s]\.com$
 DOMAIN-SUFFIX,azure-dns.cn
-DOMAIN-REGEX,.+\.azure-dns-([1-9]|10)\.cn$
 DOMAIN-SUFFIX,bing.com.cn
 DOMAIN-SUFFIX,cn.bing.com
 DOMAIN-SUFFIX,cn.bing.net
