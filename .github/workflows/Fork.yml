@@ -129,6 +129,11 @@ jobs:
       run: |
         cd YYDS-repo/mihomo/rules
         for file in *.list; do
+            # 排除包含 cn_ip.list 的文件
+            if [[ "$file" =~ AAA_ip\.list$ ]]; then
+              continue
+            fi
+
             sed -i -e 's/, /,/g' \
                   -e 's/;/# /g' \
                   -e 's/host,/HOST,/g' \
@@ -155,15 +160,22 @@ jobs:
                   -e '/404: Not Found/d' \
                   -e '/^DOMAIN-REGEX,/d' \
                   "$file"
+
             # 如果为IP规则且不包含no-resolve 则添加no-resolve
             awk '/^IP-/ && !/,no-resolve/ {print $0",no-resolve"; next} {print}' "$file" > tmpfile
             mv tmpfile "$file"
             
-            # 处理IPv6的CIDR，自动将包含冒号的IPv6行改为IP-CIDR6
-            awk '/^IP-CIDR,/ && /:/' "$file" | sed 's/IP-CIDR,/IP-CIDR6,/' > tmpfile
+            # 处理IPv6的CIDR，严格匹配IPv6格式，并将其自动替换为IP-CIDR6
+            awk '{
+              # 正则匹配IPv6地址格式（多个冒号，并且没有"."的IPv4形式）
+              if ($0 ~ /^IP-CIDR,[0-9a-fA-F:]+\/[0-9]+$/) {
+                gsub("IP-CIDR,", "IP-CIDR6,");
+              }
+              print
+            }' "$file" > tmpfile
             mv tmpfile "$file"
-          done
-
+        done
+        
 ###### Commit
     - name: Add and Commits
       run: |
