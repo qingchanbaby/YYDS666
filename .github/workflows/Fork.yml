@@ -125,12 +125,11 @@ jobs:
         curl -L -o YYDS-repo/mihomo/rules/cn_ip.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/classical/cn.list"
 
     ###### 
-    # 适配规则
     - name: Edit mihomo/rules
       run: |
         cd YYDS-repo/mihomo/rules
         # 遍历目录下所有以 "_ip.list" 结尾的文件
-        for file in *.list; do
+        for file in *_ip.list; do
           sed -i -e 's/, /,/g' \
                 -e 's/;/# /g' \
                 -e 's/host,/HOST,/g' \
@@ -166,6 +165,39 @@ jobs:
           mv tmpfile "$file"
         done
 
+    ###### 删除 DOMAIN-REGEX
+    - name: Edit mihomo/rules
+      run: |
+        cd YYDS-repo/mihomo/rules
+        for file in *.list; do
+          if [[ ! "$file" =~ _ip\.list$ ]]; then
+          sed -i -e 's/, /,/g' \
+                -e 's/;/# /g' \
+                -e 's/host,/HOST,/g' \
+                -e 's/host-/HOST-/g' \
+                -e 's/-suffix/-SUFFIX/g' \
+                -e 's/-keyword/-KEYWORD/g' \
+                -e 's/ip-cidr/IP-CIDR/g' \
+                -e 's/-wildcard/-WILDCARD/g' \
+                -e 's/geoip/GEOIP/g' \
+                -e 's/HOST,/DOMAIN,/g' \
+                -e 's/HOST-/DOMAIN-/g' \
+                -e 's/IP6-CIDR,/IP-CIDR6,/g' \
+                -e 's/,REJECT$//g' \
+                -e 's/,DIRECT$//g' \
+                -e 's/,reject$//g' \
+                -e 's/,direct$//g' \
+                -e 's/\/\/.*//g' \
+                -e '/# 更新：/d' \
+                -e '/# AUTHOR:/d' \
+                -e '/# REPO:/d' \
+                -e '/# UPDATED:/d' \
+                -e '/# 数目: /d' \
+                -e '/# 规则: /d' \
+                -e '/404: Not Found/d' \
+                -e '/^DOMAIN-REGEX,/d' \
+                "$file"
+        done
 
 ###### Commit
     - name: Add and Commits
