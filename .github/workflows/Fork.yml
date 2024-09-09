@@ -1,4 +1,4 @@
-# 2024年9月6日
+# 2024-09-09 17:20:02
 name: Fork & Edit
 
 on:
@@ -111,6 +111,9 @@ jobs:
         
         curl -L -o YYDS-repo/mihomo/rules/private.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/private.list"
         curl -L -o YYDS-repo/mihomo/rules/cn.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/classical/cn.list"
+
+        curl -L -o YYDS-repo/mihomo/rules/proxymedia.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo-lite/geosite/classical/proxymedia.list"
+
         # IP list 
         curl -L -o YYDS-repo/mihomo/rules/cloudflare_ip.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/classical/cloudflare.list"
         curl -L -o YYDS-repo/mihomo/rules/facebook_ip.list "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/classical/facebook.list"
