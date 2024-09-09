@@ -133,7 +133,7 @@ jobs:
             if [[ "$file" =~ AAA_ip\.list$ ]]; then
               continue
             fi
-
+            
             sed -i -e 's/, /,/g' \
                   -e 's/;/# /g' \
                   -e 's/host,/HOST,/g' \
@@ -168,14 +168,14 @@ jobs:
             # 处理IPv6的CIDR，严格匹配IPv6格式，并将其自动替换为IP-CIDR6
             awk '{
               # 正则匹配IPv6地址格式（多个冒号，并且没有"."的IPv4形式）
-              if ($0 ~ /^IP-CIDR,[0-9a-fA-F:]+\/[0-9]+$/) {
+              if ($0 ~ /^IP-CIDR,[0-9a-fA-F:]+\/[0-9]+/) {
                 gsub("IP-CIDR,", "IP-CIDR6,");
               }
               print
             }' "$file" > tmpfile
             mv tmpfile "$file"
         done
-        
+
 ###### Commit
     - name: Add and Commits
       run: |
