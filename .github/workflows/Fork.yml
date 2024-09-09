@@ -126,48 +126,46 @@ jobs:
 
     ###### 
     # 适配规则
-# 适配规则
-- name: Edit mihomo/rules
-  run: |
-    cd YYDS-repo/mihomo/rules
-    for file in *_ip.list; do
-        sed -i -e 's/, /,/g' \
-              -e 's/;/# /g' \
-              -e 's/host,/HOST,/g' \
-              -e 's/host-/HOST-/g' \
-              -e 's/-suffix/-SUFFIX/g' \
-              -e 's/-keyword/-KEYWORD/g' \
-              -e 's/ip-cidr/IP-CIDR/g' \
-              -e 's/-wildcard/-WILDCARD/g' \
-              -e 's/geoip/GEOIP/g' \
-              -e 's/HOST,/DOMAIN,/g' \
-              -e 's/HOST-/DOMAIN-/g' \
-              -e 's/IP6-CIDR,/IP-CIDR6,/g' \
-              -e 's/,REJECT$//g' \
-              -e 's/,DIRECT$//g' \
-              -e 's/,reject$//g' \
-              -e 's/,direct$//g' \
-              -e 's/\/\/.*//g' \
-              -e '/# 更新：/d' \
-              -e '/# AUTHOR:/d' \
-              -e '/# REPO:/d' \
-              -e '/# UPDATED:/d' \
-              -e '/# 数目: /d' \
-              -e '/# 规则: /d' \
-              -e '/404: Not Found/d' \
-              -e '/^DOMAIN-REGEX,/d' \
-              "$file"
-        # 如果为IP规则且不包含no-resolve 则添加no-resolve
-        awk '/^IP-/ && !/,no-resolve/ {print $0",no-resolve"; next} {print}' "$file" > tmpfile
-        mv tmpfile "$file"
-        
-        # 处理IPv6的CIDR，自动将包含冒号的IPv6行改为IP-CIDR6
-        awk '/^IP-CIDR,/ && /:/' "$file" | sed 's/IP-CIDR,/IP-CIDR6,/' > tmpfile
-        mv tmpfile "$file"
-      else
-        echo "$file not found."
-      fi
-    done
+    - name: Edit mihomo/rules
+      run: |
+        cd YYDS-repo/mihomo/rules
+        # 遍历目录下所有以 "_ip.list" 结尾的文件
+        for file in *_ip.list; do
+          sed -i -e 's/, /,/g' \
+                -e 's/;/# /g' \
+                -e 's/host,/HOST,/g' \
+                -e 's/host-/HOST-/g' \
+                -e 's/-suffix/-SUFFIX/g' \
+                -e 's/-keyword/-KEYWORD/g' \
+                -e 's/ip-cidr/IP-CIDR/g' \
+                -e 's/-wildcard/-WILDCARD/g' \
+                -e 's/geoip/GEOIP/g' \
+                -e 's/HOST,/DOMAIN,/g' \
+                -e 's/HOST-/DOMAIN-/g' \
+                -e 's/IP6-CIDR,/IP-CIDR6,/g' \
+                -e 's/,REJECT$//g' \
+                -e 's/,DIRECT$//g' \
+                -e 's/,reject$//g' \
+                -e 's/,direct$//g' \
+                -e 's/\/\/.*//g' \
+                -e '/# 更新：/d' \
+                -e '/# AUTHOR:/d' \
+                -e '/# REPO:/d' \
+                -e '/# UPDATED:/d' \
+                -e '/# 数目: /d' \
+                -e '/# 规则: /d' \
+                -e '/404: Not Found/d' \
+                -e '/^DOMAIN-REGEX,/d' \
+                "$file"
+          # 如果为IP规则且不包含no-resolve 则添加no-resolve
+          awk '/^IP-/ && !/,no-resolve/ {print $0",no-resolve"; next} {print}' "$file" > tmpfile
+          mv tmpfile "$file"
+          
+          # 处理IPv6的CIDR，自动将包含冒号的IPv6行改为IP-CIDR6
+          awk '/^IP-CIDR,/ && /:/' "$file" | sed 's/IP-CIDR,/IP-CIDR6,/' > tmpfile
+          mv tmpfile "$file"
+        done
+
 
 ###### Commit
     - name: Add and Commits
