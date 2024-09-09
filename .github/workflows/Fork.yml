@@ -130,7 +130,7 @@ jobs:
       run: |
         cd YYDS-repo/mihomo/rules
         # 遍历目录下所有以 "_ip.list" 结尾的文件
-        for file in *_ip.list; do
+        for file in *.list; do
           sed -i -e 's/, /,/g' \
                 -e 's/;/# /g' \
                 -e 's/host,/HOST,/g' \
