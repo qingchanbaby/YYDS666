@@ -154,3 +154,4 @@ DOMAIN-SUFFIX,disney.co.th
 DOMAIN-SUFFIX,disney-portal.my.onetrust.com
 DOMAIN-SUFFIX,disney.my.sentry.io
 DOMAIN-SUFFIX,disneyplus.com.ssl.sc.omtrdc.net
+DOMAIN-REGEX,^hses[1-7]?\.akamaized\.net$

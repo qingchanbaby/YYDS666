@@ -1562,6 +1562,12 @@ DOMAIN,sync.itunes.apple.com
 DOMAIN,tf-feedback.itunes.apple.com
 DOMAIN,upp.itunes.apple.com
 DOMAIN,www.support.apple.com
+DOMAIN-REGEX,^a[1-5]\.mzstatic\.com$
+DOMAIN-REGEX,^cdn(-cn)?[1-4]?\.apple-mapkit\.com$
+DOMAIN-REGEX,^cl[1-5]-cdn\.origin-apple\.com\.akadns\.net$
+DOMAIN-REGEX,^cl[1-5]\.apple\.com$
+DOMAIN-REGEX,^is[1-5](-ssl)?\.mzstatic\.com$
+DOMAIN-REGEX,^s[1-5]?\.mzstatic\.com$
 DOMAIN,a1.mzstatic.com
 DOMAIN,a2.mzstatic.com
 DOMAIN,a3.mzstatic.com
