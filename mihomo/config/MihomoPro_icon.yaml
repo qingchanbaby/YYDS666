@@ -1,5 +1,5 @@
-# 项目: MihomoPro 高端订制配置 版本 V2.0（带图标）
-# 日期：2024年9月6日
+# 项目: MihomoPro 高端订制配置 版本 V2.1
+# 日期：2024-09-10 00:28:24
 # 项目地址: https://github.com/666OS
 # TG频道: https://t.me/Pinched666
 # 官方文档：https://wiki.metacubex.one/
@@ -14,11 +14,14 @@
 # 7. 兼容性：理论上兼容 Mihomo 核心应用，如 OpenClash、mihomoTProxy、mihomo-party、FlClash、Clash Verge 和 ClashX Meta。
 # 8. 多机场订阅：支持多机场订阅的混合使用，并在机场节点前增加标识，方便区分。
 # 9. 默认设置优化：采用傻瓜式最优默认设置，所有策略的默认代理设置统一联动，用户只需修改一个默认代理，即可实现全局联动，也可按实现情况再对不同策略组做单独切换。
+# 10.完美通过权威DNS测漏网站测试，5星好评，欢迎来测，测测更健康！
+# 11.使用本配置在OpenClah中不要开覆写！不要开覆写！不要开覆写！覆写设置中能禁用就禁用，能不打勾不要打勾。运行模式Fake-IP模式,实验性：绕过指定区域 IP 禁用。
+# 12.学会看日志，看运行配置，自行排查问题。
 ############################################## - ⚓️ 锚点区开始 - ##############################################
 # 锚点 - 远程订阅组
-PProviders: &PProviders {type: http, interval: 86400, health-check: {enable: true, url: "https://www.gstatic.com/generate_204", interval: 300}, filter: '^(?!.*(群|邀|返|循|客|网|获|订|量|到|机|次|版|官|备|过|已|联系|工|贩|通知|卖|防|地|频|无法|说|使|提|访|支|教|关|更|作|加入))'}
-# 锚点 - 筛选组
-FilterHK: &FilterHK '(?i)港|HK|Hong|🇭🇰'
+PProviders: &PProviders {type: http, interval: 86400, health-check: {enable: true, url: 'https://www.gstatic.com/generate_204', interval: 300}, filter: '^(?!.*(群|邀|返|循|客|网|获|订|量|到|机|次|版|官|备|过|已|联系|工|贩|通知|卖|防|地|频|无法|说|使|提|访|支|教|关|更|作|加入))'}
+# 锚点 - 筛选组 
+FilterHK: &FilterHK '(?!)港|HK|Hong|🇭🇰'
 FilterTW: &FilterTW '(?i)台|TW|tai|🇼🇸'
 FilterSG: &FilterSG '(?i)新|SG|Sing|🇸🇬'
 FilterJP: &FilterJP '(?i)日|JP|Japan|🇯🇵'
@@ -45,8 +48,8 @@ ClassicalText: &ClassicalText {type: http, interval: 86400, behavior: classical,
 ############################################## - ⚓️ 锚点区结束 - ############################################## 
 # 远程订阅组❗️注意：请提供您的机场订阅链接，每个链接一行，并为每个机场命名，末尾的[A]为每个节点添加机场名称前缀，可自定义。
 proxy-providers:
-  机场A: {<<: *PProviders, url: "机场订阅地址", override: {additional-prefix: "[A] "}}
-  机场B: {<<: *PProviders, url: "机场订阅地址", override: {additional-prefix: "[B] "}}
+  机场A: {<<: *PProviders, url: '机场订阅地址', override: {additional-prefix: '[A] '}}
+  机场B: {<<: *PProviders, url: '机场订阅地址', override: {additional-prefix: '[B] '}}
 
 # 全局配置
 port: 7890
@@ -65,10 +68,11 @@ global-client-fingerprint: chrome
 allow-lan: true
 bind-address: '*'
 mode: rule # 日志级别 info / silent / error / warning / debug
-keep-alive-interval: 600  # 间隔 减少移动设备耗电问题的临时措施
 log-level: warning
 ipv6: true # IPv6代理开关 true / false
 udp: true
+keep-alive-idle: 600  # 空闲时间 减少移动设备耗电问题
+keep-alive-interval: 15  # 间隔时间 
 
 # 外部控制 (API)
 external-controller: 0.0.0.0:9090
@@ -91,7 +95,7 @@ profile:
 
 # 域名嗅探
 sniffer:
-  enable: true # 嗅探开关 true / false
+  enable: true # 开关 true / false
   force-dns-mapping: true
   parse-pure-ip: true
   override-destination: true
@@ -104,153 +108,58 @@ sniffer:
     QUIC:
       ports: [443, 8443]
   force-domain:
-    - +.v2ex.com
+    - '+.v2ex.com'
   skip-domain:
-    - Mijia Cloud
+    - 'Mijia Cloud'
+    - '+.push.apple.com'
 
 # 虚拟网卡模式
 tun:
-  enable: false  # 开关 true / false
-  stack: system
+  enable: true # 开关 true / false
+  stack: mixed
   dns-hijack:
-    - any:53
+    - 'any:53'
+    - 'tcp://any:53'
   auto-route: true
+  auto-redirect: true
   auto-detect-interface: true
 
 # DNS 设置
 dns:
-  enable: true  # 开关 true / false
-  listen: 0.0.0.0:1053
-  ipv6: true  # IPv6 DNS解析开关
+  enable: true
+  ipv6: true
+  respect-rules: true
   enhanced-mode: fake-ip
-  fake-ip-range: 198.18.0.1/16
   fake-ip-filter-mode: blacklist
-  # 过滤集黑白名单 blacklist / whitelist
-  # 默认为blacklist，即如果匹配成功不返回fake-ip
+  # 配置不使用 fake-ip 的域名
   fake-ip-filter:
     - '*'
     - '+.lan'
     - '+.local'
-    - '+.direct'
-    - '+.msftconnecttest.com'
-    - '+.msftncsi.com'
     - '+.market.xiaomi.com'
     - '+.push.apple.com'
-    - '+.docker.io' # 自定义
-    - '+.miwifi.com' # 自定义
-    - rule-set:cn_domain # 规则集绕过大陆
-    - rule-set:private # 规则集绕过大陆
-    - "*.localdomain"
-    - "*.example"
-    - "*.invalid"
-    - "*.localhost"
-    - "*.test"
-    - "*.home.arpa"
-    - time.*.com
-    - time.*.gov
-    - time.*.edu.cn
-    - time.*.apple.com
-    - time-ios.apple.com
-    - time1.*.com
-    - time2.*.com
-    - time3.*.com
-    - time4.*.com
-    - time5.*.com
-    - time6.*.com
-    - time7.*.com
-    - ntp.*.com
-    - ntp1.*.com
-    - ntp2.*.com
-    - ntp3.*.com
-    - ntp4.*.com
-    - ntp5.*.com
-    - ntp6.*.com
-    - ntp7.*.com
-    - "*.time.edu.cn"
-    - "*.ntp.org.cn"
-    - "+.pool.ntp.org"
-    - time1.cloud.tencent.com
-    - music.163.com
-    - "*.music.163.com"
-    - "*.126.net"
-    - musicapi.taihe.com
-    - music.taihe.com
-    - songsearch.kugou.com
-    - trackercdn.kugou.com
-    - "*.kuwo.cn"
-    - api-jooxtt.sanook.com
-    - api.joox.com
-    - joox.com
-    - y.qq.com
-    - "*.y.qq.com"
-    - streamoc.music.tc.qq.com
-    - mobileoc.music.tc.qq.com
-    - isure.stream.qqmusic.qq.com
-    - dl.stream.qqmusic.qq.com
-    - aqqmusic.tc.qq.com
-    - amobile.music.tc.qq.com
-    - "*.xiami.com"
-    - "*.music.migu.cn"
-    - music.migu.cn
-    - localhost.ptlogin2.qq.com
-    - localhost.sec.qq.com
-    - "+.qq.com"
-    - "+.tencent.com"
-    - "+.srv.nintendo.net"
-    - "*.n.n.srv.nintendo.net"
-    - "+.cdn.nintendo.net"
-    - "+.stun.playstation.net"
-    - xbox.*.*.microsoft.com
-    - "*.*.xboxlive.com"
-    - xbox.*.microsoft.com
-    - xnotify.xboxlive.com
-    - "+.battlenet.com.cn"
-    - "+.wotgame.cn"
-    - "+.wggames.cn"
-    - "+.wowsgame.cn"
-    - "+.wargaming.net"
-    - proxy.golang.org
-    - stun.*.*
-    - stun.*.*.*
-    - "+.stun.*.*"
-    - "+.stun.*.*.*"
-    - "+.stun.*.*.*.*"
-    - "+.stun.*.*.*.*.*"
-    - heartbeat.belkin.com
-    - "*.linksys.com"
-    - "*.linksyssmartwifi.com"
-    - "*.router.asus.com"
-    - mesu.apple.com
-    - swscan.apple.com
-    - swquery.apple.com
-    - swdownload.apple.com
-    - swcdn.apple.com
-    - swdist.apple.com
-    - lens.l.google.com
-    - stun.l.google.com
-    - na.b.g-tun.com
-    - "+.nflxvideo.net"
-    - "*.square-enix.com"
-    - "*.finalfantasyxiv.com"
-    - "*.ffxiv.com"
-    - "*.ff14.sdo.com"
-    - ff.dorado.sdo.com
-    - "*.mcdn.bilivideo.cn"
-    - "+.media.dssott.com"
-    - shark007.net
-    - Mijia Cloud
-    - "+.cmbchina.com"
-    - "+.cmbimg.com"
-    - local.adguard.org
-    - "+.sandai.net"
-    - "+.n0808.com"
-    - "+.uu.163.com"
-  default-nameserver:
-    - 223.5.5.5
-    - 223.6.6.6
+    - '+.gitv.tv'
+    - '+.cnmmb.xyz'
+    - '+.docker.io'
+    - '+.miwifi.com'
+    - 'rule-set:cn_domain,private_domain' # 规则集国内域名直接真实IP
+
+  # DNS 主要域名配置
   nameserver:
-    - https://223.5.5.5/dns-query#h3=true
-    - https://223.6.6.6/dns-query#h3=true
+    - 114.114.114.114 # default value
+    - 223.5.5.5 # default value
+  # 专用于节点域名解析的 DNS 服务器，非必要配置项
+  proxy-server-nameserver:
+    - 'https://dns.google/dns-query'
+    - 'tls://one.one.one.one'
+  # 配置查询域名使用的 DNS 服务器
+  nameserver-policy:
+    'rule-set:cn_domain,private_domain':
+      - 'https://doh.pub/dns-query'
+      - 'https://dns.alidns.com/dns-query'
+    'rule-set:geolocation-!cn':
+      - 'https://dns.cloudflare.com/dns-query'
+      - 'https://dns.google/dns-query'
 
 # 本地自建节点组
 proxies:
@@ -408,7 +317,7 @@ rule-providers:
   geolocation-!cn:
     <<: *DomainMrs
     url: https://mirror.ghproxy.com/https://github.com/666OS/YYDS/raw/main/mihomo/rules/geolocation-!cn.mrs
-  private:
+  private_domain:
     <<: *DomainMrs
     url: https://mirror.ghproxy.com/https://github.com/666OS/YYDS/raw/main/mihomo/rules/private.mrs
   cn_domain:
@@ -439,7 +348,7 @@ rule-providers:
     
 # 路由: 规则走向从上到下
 rules:
-  - RULE-SET,category-public-tracker,REJECT # 拒绝公共行为跟踪
+  - RULE-SET,category-public-tracker,REJECT-DROP # 拒绝公共行为跟踪
   - RULE-SET,private_ip,国内网站,no-resolve
   - RULE-SET,openai,ChatGPT
   - RULE-SET,category-ai-chat-!cn,AI 平台
