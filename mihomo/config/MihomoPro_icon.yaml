@@ -1,5 +1,5 @@
-# 项目: MihomoPro 高端订制配置 版本 V2.1
-# 日期：2024-09-10 00:28:24
+# 项目: MihomoPro 高端订制配置 版本 V2.2
+# 日期：2024年9月10日
 # 项目地址: https://github.com/666OS
 # TG频道: https://t.me/Pinched666
 # 官方文档：https://wiki.metacubex.one/
@@ -19,16 +19,16 @@
 # 12.学会看日志，看运行配置，自行排查问题。
 ############################################## - ⚓️ 锚点区开始 - ##############################################
 # 锚点 - 远程订阅组
-PProviders: &PProviders {type: http, interval: 86400, health-check: {enable: true, url: 'https://www.gstatic.com/generate_204', interval: 300}, filter: '^(?!.*(群|邀|返|循|客|网|获|订|量|到|机|次|版|官|备|过|已|联系|工|贩|通知|卖|防|地|频|无法|说|使|提|访|支|教|关|更|作|加入))'}
+PProviders: &PProviders {type: http, interval: 86400, health-check: {enable: true, url: 'https://www.gstatic.com/generate_204', interval: 300}, filter: '^(?!.*(群|邀请|返利|循环|官网|客服|网站|网址|获取|订阅|流量|到期|机场|下次|版本|官址|备用|过期|已用|联系|邮箱|工单|贩卖|通知|倒卖|防止|国内|地址|频道|无法|说明|使用|提示|特别|访问|支持|教程|关注|更新|作者|加入|USE|USED|TOTAL|EXPIRE|EMAIL|Panel|Channel|Author))'}
 # 锚点 - 筛选组 
-FilterHK: &FilterHK '(?!)港|HK|Hong|🇭🇰'
-FilterTW: &FilterTW '(?i)台|TW|tai|🇼🇸'
-FilterSG: &FilterSG '(?i)新|SG|Sing|🇸🇬'
-FilterJP: &FilterJP '(?i)日|JP|Japan|🇯🇵'
-FilterUS: &FilterUS '(?i)美|US|🇺🇸'
-FilterEU: &FilterEU '(?i)(🇦🇹|🇧🇪|🇨🇿|🇩🇰|🇫🇮|🇫🇷|🇩🇪|🇮🇪|🇮🇹|🇱🇹|🇱🇺|🇳🇱|🇵🇱|🇸🇪|🇬🇧|GB|奥地利|比利时|捷克|丹麦|芬兰|法国|德国|爱尔兰|意大利|立陶宛|卢森堡|荷兰|波兰|瑞典|英)'
-FilterOther: &FilterOther '^(?!.*(🇭🇰|🇯🇵|🇺🇸|🇸🇬|🇨🇳|🇦🇹|🇧🇪|🇨🇿|🇩🇰|🇫🇮|🇫🇷|🇩🇪|🇮🇪|🇮🇹|🇱🇹|🇱🇺|🇳🇱|🇵🇱|🇸🇪|🇬🇧|GB|德|DE|港|hk|hongkong|台|tw|taiwan|日|jp|japan|新|sg|美|us))'
-FilterAll: &FilterAll '^(?!.*(群|邀|返|循|客|网|获|订|量|到|机|次|版|官|备|过|已|联系|工|贩|通知|卖|防|地|频|无法|说|使|提|访|支|教|关|更|作|加入))'
+FilterHK: &FilterHK '(?!)港|🇭🇰|HK|Hong|HKG'
+FilterTW: &FilterTW '(?i)台|🇼🇸|🇹🇼|TW|tai|TPE|TSA|KHH'
+FilterSG: &FilterSG '(?i)新|🇸🇬|SG|Sing|SIN|XSP'
+FilterJP: &FilterJP '(?i)日|🇯🇵|JP|Japan|NRT|HND|KIX|CTS|FUK'
+FilterUS: &FilterUS '(?i)美|🇺🇸|US|USA|JFK|LAX|ORD|ATL|DFW|SFO|MIA|SEA|IAD'
+FilterEU: &FilterEU '(?i)(🇧🇪|🇨🇿|🇩🇰|🇫🇮|🇫🇷|🇩🇪|🇮🇪|🇮🇹|🇱🇹|🇱🇺|🇳🇱|🇵🇱|🇸🇪|🇬🇧|BE|CZ|DK|FI|FR|DE|IE|IT|LT|LU|NL|PL|SE|CDG|FRA|AMS|MAD|BCN|FCO|MUC|BRU)'
+FilterOther: &FilterOther '^(?!.*(🇭🇰|🇼🇸|🇹🇼|🇸🇬|🇯🇵|🇺🇸|🇬🇧|🇦🇹|🇧🇪|🇨🇿|🇩🇰|🇫🇮|🇫🇷|🇩🇪|🇮🇪|🇮🇹|🇱🇹|🇱🇺|🇳🇱|🇵🇱|🇸🇪|HK|TW|SG|JP|US|GB|AT|BE|CZ|DK|FI|FR|DE|IE|IT|LT|LU|NL|PL|SE|CDG|FRA|AMS|MAD|BCN|FCO|MUC|BRU|HKG|TPE|TSA|KHH|SIN|XSP|NRT|HND|KIX|CTS|FUK|JFK|LAX|ORD|ATL|DFW|SFO|MIA|SEA|IAD|LHR|LGW))'
+FilterAll: &FilterAll '^(?!.*(群|邀请|返利|循环|官网|客服|网站|网址|获取|订阅|流量|到期|机场|下次|版本|官址|备用|过期|已用|联系|邮箱|工单|贩卖|通知|倒卖|防止|国内|地址|频道|无法|说明|使用|提示|特别|访问|支持|教程|关注|更新|作者|加入|USE|USED|TOTAL|EXPIRE|EMAIL|Panel|Channel|Author))'
 # 锚点 - 策略组
 UrlTest: &UrlTest {type: url-test, interval: 60, tolerance: 20, lazy: true, url: 'https://www.gstatic.com/generate_204', disable-udp: false, timeout: 2000, max-failed-times: 3, hidden: true, include-all-providers: true}
 FallBack: &FallBack {type: fallback, interval: 60, lazy: true, url: 'https://www.gstatic.com/generate_204', disable-udp: false, timeout: 2000, max-failed-times: 3, hidden: true, include-all-providers: true}
