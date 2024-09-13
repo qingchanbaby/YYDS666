@@ -1,8 +1,8 @@
-# 项目: MihomoPro 高端订制配置 版本 V2.3
-# 日期：2024年9月11日
+# 项目: MihomoPro 高端订制配置 版本 V2.4
+# 日期：2024年9月13日
 # 项目地址: https://github.com/666OS
 # TG频道: https://t.me/Pinched666
-# 官方文档：https://wiki.metacubex.one/
+# 官方文档：https://wiki.metacubex.one
 # ❗️注意：在proxy-providers加入您的机场订阅链接（锚点区结束后面）。如有问题请反馈感谢!
 # 配置亮点：
 # 1. 策略组分类：最详细的大分类，同时有丰富的细分应用分组，大分类只为兜底作用，把选有的选择权交给用户。
@@ -25,26 +25,27 @@ FilterHK: &FilterHK '(?!)港|🇭🇰|HK|Hong|HKG'
 FilterTW: &FilterTW '(?i)台|🇼🇸|🇹🇼|TW|tai|TPE|TSA|KHH'
 FilterSG: &FilterSG '(?i)新|🇸🇬|SG|Sing|SIN|XSP'
 FilterJP: &FilterJP '(?i)日|🇯🇵|JP|Japan|NRT|HND|KIX|CTS|FUK'
+FilterKR: &FilterKR '(?i)韩|🇰🇷|韓|韩国|韓國|首尔|南朝鲜|KR|KOR|Korea|South'
 FilterUS: &FilterUS '(?i)美|🇺🇸|US|USA|JFK|LAX|ORD|ATL|DFW|SFO|MIA|SEA|IAD'
 FilterEU: &FilterEU '(?i)(🇧🇪|🇨🇿|🇩🇰|🇫🇮|🇫🇷|🇩🇪|🇮🇪|🇮🇹|🇱🇹|🇱🇺|🇳🇱|🇵🇱|🇸🇪|🇬🇧|BE|CZ|DK|FI|FR|DE|LT|LU|NL|PL|SE|CDG|FRA|AMS|MAD|BCN|FCO|MUC|BRU)'
-FilterOther: &FilterOther '^(?!.*(🇭🇰|🇼🇸|🇹🇼|🇸🇬|🇯🇵|🇺🇸|🇬🇧|🇦🇹|🇧🇪|🇨🇿|🇩🇰|🇫🇮|🇫🇷|🇩🇪|🇮🇪|🇮🇹|🇱🇹|🇱🇺|🇳🇱|🇵🇱|🇸🇪|HK|TW|SG|JP|US|GB|AT|BE|CZ|DK|FI|FR|DE|LT|LU|NL|PL|SE|CDG|FRA|AMS|MAD|BCN|FCO|MUC|BRU|HKG|TPE|TSA|KHH|SIN|XSP|NRT|HND|KIX|CTS|FUK|JFK|LAX|ORD|ATL|DFW|SFO|MIA|SEA|IAD|LHR|LGW))'
-FilterAll: &FilterAll '^(?!.*(群|邀请|返利|循环|官网|客服|网站|网址|获取|订阅|流量|到期|机场|下次|版本|官址|备用|过期|已用|联系|邮箱|工单|贩卖|通知|倒卖|防止|国内|地址|频道|无法|说明|使用|提示|特别|访问|支持|教程|关注|更新|作者|加入|USE|USED|TOTAL|EXPIRE|EMAIL|Panel|Channel|Author))'
+FilterOther: &FilterOther '^(?!.*(直连|港|台|新|日|韩|美|🇭🇰|🇼🇸|🇹🇼|🇸🇬|🇯🇵|🇰🇷|🇺🇸|🇬🇧|🇦🇹|🇧🇪|🇨🇿|🇩🇰|🇫🇮|🇫🇷|🇩🇪|🇮🇪|🇮🇹|🇱🇹|🇱🇺|🇳🇱|🇵🇱|🇸🇪|HK|TW|SG|JP|KR|US|GB|AT|BE|CZ|DK|FI|FR|DE|LT|LU|NL|PL|SE|CDG|FRA|AMS|MAD|BCN|FCO|MUC|BRU|HKG|TPE|TSA|KHH|SIN|XSP|NRT|HND|KIX|CTS|FUK|JFK|LAX|ORD|ATL|DFW|SFO|MIA|SEA|IAD|LHR|LGW))'
+FilterAll: &FilterAll '^(?!.*(直连|群|邀请|返利|循环|官网|客服|网站|网址|获取|订阅|流量|到期|机场|下次|版本|官址|备用|过期|已用|联系|邮箱|工单|贩卖|通知|倒卖|防止|国内|地址|频道|无法|说明|使用|提示|特别|访问|支持|教程|关注|更新|作者|加入|USE|USED|TOTAL|EXPIRE|EMAIL|Panel|Channel|Author))'
 # 锚点 - 策略组
-UrlTest: &UrlTest {type: url-test, interval: 60, tolerance: 20, lazy: true, url: 'https://www.gstatic.com/generate_204', disable-udp: false, timeout: 2000, max-failed-times: 3, hidden: true, include-all-providers: true}
-FallBack: &FallBack {type: fallback, interval: 60, lazy: true, url: 'https://www.gstatic.com/generate_204', disable-udp: false, timeout: 2000, max-failed-times: 3, hidden: true, include-all-providers: true}
-LoadBalanceCH: &LoadBalanceCH {type: load-balance, interval: 60, lazy: true, url: 'https://www.gstatic.com/generate_204', disable-udp: false, strategy: consistent-hashing, timeout: 2000, max-failed-times: 3, hidden: true, include-all-providers: true}
-LoadBalanceCR: &LoadBalanceCR {type: load-balance, interval: 60, lazy: true, url: 'https://www.gstatic.com/generate_204', disable-udp: false, strategy: round-robin, timeout: 2000, max-failed-times: 3, hidden: true, include-all-providers: true}
+UrlTest: &UrlTest {type: url-test, interval: 60, tolerance: 20, lazy: true, url: 'https://www.gstatic.com/generate_204', disable-udp: false, timeout: 2000, max-failed-times: 3, hidden: true, include-all: true}
+FallBack: &FallBack {type: fallback, interval: 60, lazy: true, url: 'https://www.gstatic.com/generate_204', disable-udp: false, timeout: 2000, max-failed-times: 3, hidden: true, include-all: true}
+LoadBalanceCH: &LoadBalanceCH {type: load-balance, interval: 60, lazy: true, url: 'https://www.gstatic.com/generate_204', disable-udp: false, strategy: consistent-hashing, timeout: 2000, max-failed-times: 3, hidden: true, include-all: true}
+LoadBalanceCR: &LoadBalanceCR {type: load-balance, interval: 60, lazy: true, url: 'https://www.gstatic.com/generate_204', disable-udp: false, strategy: round-robin, timeout: 2000, max-failed-times: 3, hidden: true, include-all: true}
 # 锚点 - 选择组 
-SelectHK: &SelectHK {type: select, proxies: [香港策略, 台湾策略, 新加坡策略, 日本策略, 美国策略, 欧盟策略, 冷门自选, 全球手动, 链式代理, 直连]}
-SelectSG: &SelectSG {type: select, proxies: [新加坡策略, 香港策略, 台湾策略, 日本策略, 美国策略, 欧盟策略, 冷门自选, 全球手动, 链式代理, 直连]}
-SelectUS: &SelectUS {type: select, proxies: [美国策略, 香港策略, 台湾策略, 新加坡策略, 日本策略, 欧盟策略, 冷门自选, 全球手动, 链式代理, 直连]}
-SelectProxy: &SelectProxy {type: select, proxies: [默认代理, 香港策略, 台湾策略, 新加坡策略, 日本策略, 美国策略, 欧盟策略, 冷门自选, 全球手动, 链式代理, 直连]}
+SelectHK: &SelectHK {type: select, proxies: [香港策略, 台湾策略, 新加坡策略, 日本策略, 韩国策略, 美国策略, 欧盟策略, 冷门自选, 全球手动, 链式代理, 直连]}
+SelectSG: &SelectSG {type: select, proxies: [新加坡策略, 香港策略, 台湾策略, 日本策略, 韩国策略, 美国策略, 欧盟策略, 冷门自选, 全球手动, 链式代理, 直连]}
+SelectUS: &SelectUS {type: select, proxies: [美国策略, 香港策略, 台湾策略, 新加坡策略, 日本策略, 韩国策略, 欧盟策略, 冷门自选, 全球手动, 链式代理, 直连]}
+SelectProxy: &SelectProxy {type: select, proxies: [默认代理, 香港策略, 台湾策略, 新加坡策略, 日本策略, 韩国策略, 美国策略, 欧盟策略, 冷门自选, 全球手动, 链式代理, 直连]}
 # 锚点 - 规则集
 DomainMrs: &DomainMrs {type: http, interval: 86400, behavior: domain, format: mrs}
 DomainText: &DomainText {type: http, interval: 86400, behavior: domain, format: text}
 IPcidrMrs: &IPcidrMrs {type: http, interval: 86400, behavior: ipcidr, format: mrs}
 IPcidrText: &IPcidrText {type: http, interval: 86400, behavior: ipcidr, format: text}
-ClassicalText: &ClassicalText {type: http, interval: 86400, behavior: classical, format: text} # yaml/list
+ClassicalText: &ClassicalText {type: http, interval: 86400, behavior: classical, format: text}
 ############################################## - ⚓️ 锚点区结束 - ############################################## 
 # 远程订阅组❗️注意：请提供您的机场订阅链接，每个链接一行，并为每个机场命名，末尾的[A]为每个节点添加机场名称前缀，可自定义。
 proxy-providers:
@@ -107,9 +108,9 @@ sniffer:
       ports: [443, 8443]
     QUIC:
       ports: [443, 8443]
-  force-domain:
+  force-domain: # 强制嗅探 别乱加
     - '+.v2ex.com'
-  skip-domain:
+  skip-domain: # 忽略嗅探
     - 'Mijia Cloud'
     - '+.push.apple.com'
 
@@ -131,19 +132,160 @@ dns:
   respect-rules: false
   enhanced-mode: fake-ip
   fake-ip-filter-mode: blacklist
-  # 配置不使用 fake-ip 的域名
+  # 配置不使用 fake-ip 的域名 遇到找不到IP的情况再加域名
   fake-ip-filter:
-    - '*'
-    - '+.lan'
-    - '+.local'
-    - '+.market.xiaomi.com'
-    - '+.push.apple.com'
-    - '+.gitv.tv'
-    - '+.cnmmb.xyz'
-    - '+.docker.io'
-    - '+.miwifi.com'
-    - 'rule-set:cn_domain,private_domain' # 规则集国内域名直接真实IP
-
+    - "rule-set:cn_domain,private_domain" # 国内域名真实IP
+    #LAN
+    - "*"
+    - "*.lan"
+    - "*.localdomain"
+    - "*.example"
+    - "*.invalid"
+    - "*.localhost"
+    - "*.test"
+    - "*.local"
+    - "*.home.arpa"
+    #放行NTP服务
+    - time.*.com
+    - time.*.gov
+    - time.*.edu.cn
+    - time.*.apple.com
+    - time-ios.apple.com
+    - time1.*.com
+    - time2.*.com
+    - time3.*.com
+    - time4.*.com
+    - time5.*.com
+    - time6.*.com
+    - time7.*.com
+    - ntp.*.com
+    - ntp1.*.com
+    - ntp2.*.com
+    - ntp3.*.com
+    - ntp4.*.com
+    - ntp5.*.com
+    - ntp6.*.com
+    - ntp7.*.com
+    - "*.time.edu.cn"
+    - "*.ntp.org.cn"
+    - "+.pool.ntp.org"
+    - time1.cloud.tencent.com
+    #放行网易云音乐
+    - music.163.com
+    - "*.music.163.com"
+    - "*.126.net"
+    #百度音乐
+    - musicapi.taihe.com
+    - music.taihe.com
+    #酷狗音乐
+    - songsearch.kugou.com
+    - trackercdn.kugou.com
+    #酷我音乐
+    - "*.kuwo.cn"
+    #JOOX音乐
+    - api-jooxtt.sanook.com
+    - api.joox.com
+    - joox.com
+    #QQ音乐
+    - y.qq.com
+    - "*.y.qq.com"
+    - streamoc.music.tc.qq.com
+    - mobileoc.music.tc.qq.com
+    - isure.stream.qqmusic.qq.com
+    - dl.stream.qqmusic.qq.com
+    - aqqmusic.tc.qq.com
+    - amobile.music.tc.qq.com
+    #虾米音乐
+    - "*.xiami.com"
+    #咪咕音乐
+    - "*.music.migu.cn"
+    - music.migu.cn
+    #win10本地连接检测
+    - "+.msftconnecttest.com"
+    - "+.msftncsi.com"
+    - localhost.ptlogin2.qq.com
+    - localhost.sec.qq.com
+    #QQ登录
+    - "+.qq.com"
+    - "+.tencent.com"
+    #Game
+    #Nintendo Switch
+    - "+.srv.nintendo.net"
+    - "*.n.n.srv.nintendo.net"
+    - "+.cdn.nintendo.net"
+    #Sony PlayStation
+    - "+.stun.playstation.net"
+    #Microsoft Xbox
+    - xbox.*.*.microsoft.com
+    - "*.*.xboxlive.com"
+    - xbox.*.microsoft.com
+    - xnotify.xboxlive.com
+    #Wotgame
+    - "+.battlenet.com.cn"
+    - "+.wotgame.cn"
+    - "+.wggames.cn"
+    - "+.wowsgame.cn"
+    - "+.wargaming.net"
+    #Golang
+    - proxy.golang.org
+    #STUN
+    - stun.*.*
+    - stun.*.*.*
+    - "+.stun.*.*"
+    - "+.stun.*.*.*"
+    - "+.stun.*.*.*.*"
+    - "+.stun.*.*.*.*.*"
+    #Linksys Router
+    - heartbeat.belkin.com
+    - "*.linksys.com"
+    - "*.linksyssmartwifi.com"
+    #ASUS Router
+    - "*.router.asus.com"
+    #Apple Software Update Service
+    - mesu.apple.com
+    - swscan.apple.com
+    - swquery.apple.com
+    - swdownload.apple.com
+    - swcdn.apple.com
+    - swdist.apple.com
+    #Google
+    - lens.l.google.com
+    - stun.l.google.com
+    - na.b.g-tun.com
+    #Netflix
+    - "+.nflxvideo.net"
+    #FinalFantasy XIV Worldwide Server & CN Server
+    - "*.square-enix.com"
+    - "*.finalfantasyxiv.com"
+    - "*.ffxiv.com"
+    - "*.ff14.sdo.com"
+    - ff.dorado.sdo.com
+    #Bilibili
+    - "*.mcdn.bilivideo.cn"
+    #Disney Plus
+    - "+.media.dssott.com"
+    #shark007 Codecs 
+    - shark007.net
+    #Mijia
+    - Mijia Cloud
+    #招商银行
+    - "+.cmbchina.com"
+    - "+.cmbimg.com"
+    #AdGuard
+    - local.adguard.org
+    #迅雷
+    - "+.sandai.net"
+    - "+.n0808.com"
+    #UU Plugin
+    - "+.uu.163.com"
+    - ps.res.netease.com
+    - "+.gitv.tv"
+    - "config.ptmi.gitv.tv"
+    - "+.cnmmb.xyz"
+    - "+.docker.io"
+    - "+.miwifi.com"
+    - "+.safebrowsing.apple"
+    - "+.mihomos.us.kg"
   # DNS 主要域名配置
   default-nameserver:
     - 223.5.5.5
@@ -180,25 +322,28 @@ proxy-groups:
   - {name: 苹果服务, <<: *SelectProxy, icon: https://mirror.ghproxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Apple_1.png}
   - {name: 脸书服务, <<: *SelectProxy, icon: https://mirror.ghproxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Facebook.png}
   # 国家策略
-  - {name: 香港策略, type: select, proxies: [香港自动, 香港均衡-散列, 香港均衡-轮询], include-all-providers: true, filter: *FilterHK, icon: https://mirror.ghproxy.com/https://raw.githubusercontent.com/Orz-3/mini/master/Color/HK.png}
-  - {name: 台湾策略, type: select, proxies: [台湾自动, 台湾均衡-散列, 台湾均衡-轮询], include-all-providers: true, filter: *FilterTW, icon: https://mirror.ghproxy.com/https://raw.githubusercontent.com/Orz-3/mini/master/Color/TW.png}
-  - {name: 新加坡策略, type: select, proxies: [新加坡自动, 新加坡均衡-散列, 新加坡均衡-轮询], include-all-providers: true, filter: *FilterSG, icon: https://mirror.ghproxy.com/https://raw.githubusercontent.com/Orz-3/mini/master/Color/SG.png}
-  - {name: 日本策略, type: select, proxies: [日本自动, 日本均衡-散列, 日本均衡-轮询], include-all-providers: true, filter: *FilterJP, icon: https://mirror.ghproxy.com/https://raw.githubusercontent.com/Orz-3/mini/master/Color/JP.png}
-  - {name: 美国策略, type: select, proxies: [美国自动, 美国均衡-散列, 美国均衡-轮询], include-all-providers: true, filter: *FilterUS, icon: https://mirror.ghproxy.com/https://raw.githubusercontent.com/Orz-3/mini/master/Color/US.png}
-  - {name: 欧盟策略, type: select, proxies: [欧盟自动, 欧盟均衡-散列, 欧盟均衡-轮询], include-all-providers: true, filter: *FilterEU, icon: https://mirror.ghproxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/European_Union.png}
+  - {name: 香港策略, type: select, proxies: [香港自动, 香港均衡-散列, 香港均衡-轮询], include-all: true, filter: *FilterHK, icon: https://mirror.ghproxy.com/https://raw.githubusercontent.com/Orz-3/mini/master/Color/HK.png}
+  - {name: 台湾策略, type: select, proxies: [台湾自动, 台湾均衡-散列, 台湾均衡-轮询], include-all: true, filter: *FilterTW, icon: https://mirror.ghproxy.com/https://raw.githubusercontent.com/Orz-3/mini/master/Color/TW.png}
+  - {name: 新加坡策略, type: select, proxies: [新加坡自动, 新加坡均衡-散列, 新加坡均衡-轮询], include-all: true, filter: *FilterSG, icon: https://mirror.ghproxy.com/https://raw.githubusercontent.com/Orz-3/mini/master/Color/SG.png}
+  - {name: 日本策略, type: select, proxies: [日本自动, 日本均衡-散列, 日本均衡-轮询], include-all: true, filter: *FilterJP, icon: https://mirror.ghproxy.com/https://raw.githubusercontent.com/Orz-3/mini/master/Color/JP.png}
+  - {name: 韩国策略, type: select, proxies: [韩国自动, 韩国均衡-散列, 韩国均衡-轮询], include-all: true, filter: *FilterKR, icon: https://mirror.ghproxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Korea.png}
+  - {name: 美国策略, type: select, proxies: [美国自动, 美国均衡-散列, 美国均衡-轮询], include-all: true, filter: *FilterUS, icon: https://mirror.ghproxy.com/https://raw.githubusercontent.com/Orz-3/mini/master/Color/US.png}
+  - {name: 欧盟策略, type: select, proxies: [欧盟自动, 欧盟均衡-散列, 欧盟均衡-轮询], include-all: true, filter: *FilterEU, icon: https://mirror.ghproxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/European_Union.png}
   # 其他策略
-  - {name: 冷门自选, type: select, include-all-providers: true, filter: *FilterOther, icon: https://mirror.ghproxy.com/https://raw.githubusercontent.com/Orz-3/mini/master/Color/XD.png}
-  - {name: 全球手动, type: select, include-all-providers: true, filter: *FilterAll, icon: https://mirror.ghproxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Clubhouse.png}
+  - {name: 冷门自选, type: select, include-all: true, filter: *FilterOther, icon: https://mirror.ghproxy.com/https://raw.githubusercontent.com/Orz-3/mini/master/Color/XD.png}
+  - {name: 全球手动, type: select, include-all: true, filter: *FilterAll, icon: https://mirror.ghproxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Clubhouse.png}
   - {name: 链式代理, type: relay, proxies: [跳板机, 落地机], icon: https://mirror.ghproxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/TIDAL_1.png}
-  - {name: 跳板机, type: select, proxies: [香港策略, 台湾策略, 日本策略, 新加坡策略, 美国策略, 欧盟策略, 冷门自选, 全球手动], icon: https://mirror.ghproxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Rocket.png}
-  - {name: 落地机, type: select, include-all-providers: true, filter: *FilterAll, icon: https://mirror.ghproxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Domestic.png}
-  - {name: 国内网站, type: select, proxies: [直连, 默认代理], icon: https://mirror.ghproxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/China.png}
-  - {name: 漏网之鱼, type: select, proxies: [默认代理, 直连], icon: https://mirror.ghproxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Final.png}
+  - {name: 跳板机, type: select, proxies: [香港策略, 台湾策略, 日本策略, 新加坡策略, 韩国策略, 美国策略, 欧盟策略, 冷门自选, 全球手动], icon: https://mirror.ghproxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Rocket.png}
+  - {name: 落地机, type: select, include-all: true, filter: *FilterAll, icon: https://mirror.ghproxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Domestic.png}
+  - {name: 国内网站, type: select, proxies: [直连], icon: https://mirror.ghproxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/China.png}
+  - {name: 国外网站, <<: *SelectProxy, icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/Global.png}
+  - {name: 漏网之鱼, <<: *SelectProxy, icon: https://mirror.ghproxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Final.png}
   # 自动测速
   - {name: 香港自动, <<: *UrlTest, filter: *FilterHK, icon: https://mirror.ghproxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Auto.png}
   - {name: 台湾自动, <<: *UrlTest, filter: *FilterTW, icon: https://mirror.ghproxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Auto.png}
   - {name: 新加坡自动, <<: *UrlTest, filter: *FilterSG, icon: https://mirror.ghproxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Auto.png}
   - {name: 日本自动, <<: *UrlTest, filter: *FilterJP, icon: https://mirror.ghproxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Auto.png}
+  - {name: 韩国自动, <<: *UrlTest, filter: *FilterKR, icon: https://mirror.ghproxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Auto.png}
   - {name: 美国自动, <<: *UrlTest, filter: *FilterUS, icon: https://mirror.ghproxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Auto.png}
   - {name: 欧盟自动, <<: *UrlTest, filter: *FilterEU, icon: https://mirror.ghproxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Auto.png}
   # 负载均衡-散列
@@ -206,6 +351,7 @@ proxy-groups:
   - {name: 台湾均衡-散列, <<: *LoadBalanceCH, filter: *FilterTW, icon: https://mirror.ghproxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Round_Robin_1.png}
   - {name: 新加坡均衡-散列, <<: *LoadBalanceCH, filter: *FilterSG, icon: https://mirror.ghproxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Round_Robin_1.png}
   - {name: 日本均衡-散列, <<: *LoadBalanceCH, filter: *FilterJP, icon: https://mirror.ghproxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Round_Robin_1.png}
+  - {name: 韩国均衡-散列, <<: *LoadBalanceCH, filter: *FilterKR, icon: https://mirror.ghproxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Round_Robin_1.png}
   - {name: 美国均衡-散列, <<: *LoadBalanceCH, filter: *FilterUS, icon: https://mirror.ghproxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Round_Robin_1.png}
   - {name: 欧盟均衡-散列, <<: *LoadBalanceCH, filter: *FilterEU, icon: https://mirror.ghproxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Round_Robin_1.png}
   # 负载均衡-轮询
@@ -213,6 +359,7 @@ proxy-groups:
   - {name: 台湾均衡-轮询, <<: *LoadBalanceCR, filter: *FilterTW, icon: https://mirror.ghproxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Round_Robin.png}
   - {name: 新加坡均衡-轮询, <<: *LoadBalanceCR, filter: *FilterSG, icon: https://mirror.ghproxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Round_Robin.png}
   - {name: 日本均衡-轮询, <<: *LoadBalanceCR, filter: *FilterJP, icon: https://mirror.ghproxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Round_Robin.png}
+  - {name: 韩国均衡-轮询, <<: *LoadBalanceCR, filter: *FilterKR, icon: https://mirror.ghproxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Round_Robin.png}
   - {name: 美国均衡-轮询, <<: *LoadBalanceCR, filter: *FilterUS, icon: https://mirror.ghproxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Round_Robin.png}
   - {name: 欧盟均衡-轮询, <<: *LoadBalanceCR, filter: *FilterEU, icon: https://mirror.ghproxy.com/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Round_Robin.png}
 
@@ -370,7 +517,7 @@ rules:
   - RULE-SET,category-media,国际新闻
   - RULE-SET,category-social-media-!cn,社交平台
   - RULE-SET,cn_domain,国内网站
-  - RULE-SET,geolocation-!cn,漏网之鱼
+  - RULE-SET,geolocation-!cn,国外网站
   # IP类
   - RULE-SET,facebook_ip,脸书服务,no-resolve
   - RULE-SET,google_ip,谷歌服务,no-resolve
